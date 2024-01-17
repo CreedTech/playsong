@@ -11,14 +11,13 @@ import 'package:metadata_god/metadata_god.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:playsong/screens/home/navigation_view.dart';
-
+import 'package:home_widget/home_widget.dart';
 import 'constants/constants.dart';
 import 'helpers/config.dart';
 import 'helpers/country_codes.dart';
 import 'helpers/logging.dart';
 import 'providers/audio_service_providers.dart';
 import 'screens/auth/get_started.dart';
-import 'screens/home/home.dart';
 import 'theme/app_theme.dart';
 // import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
@@ -31,7 +30,7 @@ Future<void> main() async {
   } else {
     await Hive.initFlutter();
   }
-    for (final box in hiveBoxes) {
+  for (final box in hiveBoxes) {
     await openHiveBox(
       box['name'].toString(),
       limit: box['limit'] as bool? ?? false,
@@ -82,7 +81,7 @@ Future<void> startService() async {
   //     notificationColor: Colors.grey[900],
   //   ),
   // );
-   await initializeLogging();
+  await initializeLogging();
   MetadataGod.initialize();
   // final audioHandlerHelper = AudioHandlerHelper();
   // final AudioPlayerHandler audioHandler =
@@ -149,11 +148,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale _locale = const Locale('en', '');
+  late StreamSubscription _intentTextStreamSubscription;
   late StreamSubscription _intentDataStreamSubscription;
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   void dispose() {
+    _intentTextStreamSubscription.cancel();
     _intentDataStreamSubscription.cancel();
     super.dispose();
   }
@@ -161,6 +162,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    HomeWidget.setAppGroupId('com.example.playsong');
+    HomeWidget.registerInteractivityCallback(backgroundCallback);
     final String systemLangCode = Platform.localeName.substring(0, 2);
     if (ConstantCodes.languageCodes.values.contains(systemLangCode)) {
       _locale = Locale(systemLangCode);
@@ -170,26 +173,86 @@ class _MyAppState extends State<MyApp> {
       _locale = Locale(ConstantCodes.languageCodes[lang] ?? 'en');
     }
 
-    // AppTheme.currentTheme.addListener(() {
-    //   setState(() {});
-    // });
+    AppTheme.currentTheme.addListener(() {
+      setState(() {});
+    });
 
-    // For sharing or opening urls/text coming from outside the app while the app is in the memory
-    // _intentDataStreamSubscription = ReceiveSharingIntent.getTextStream().listen(
-    //   (String value) {
-    //     handleSharedText(value, navigatorKey);
-    //   },
-    //   onError: (err) {
-    //     // print("ERROR in getTextStream: $err");
-    //   },
-    // );
+    //    if (Platform.isAndroid || Platform.isIOS) {
+    //   // For sharing or opening urls/text coming from outside the app while the app is in the memory
+    //   _intentTextStreamSubscription =
+    //       ReceiveSharingIntent.getTextStream().listen(
+    //     (String value) {
+    //       Logger.root.info('Received intent on stream: $value');
+    //       handleSharedText(value, navigatorKey);
+    //     },
+    //     onError: (err) {
+    //       Logger.root.severe('ERROR in getTextStream', err);
+    //     },
+    //   );
 
-    // // For sharing or opening urls/text coming from outside the app while the app is closed
-    // ReceiveSharingIntent.getInitialText().then(
-    //   (String? value) {
-    //     if (value != null) handleSharedText(value, navigatorKey);
-    //   },
-    // );
+    //   // For sharing or opening urls/text coming from outside the app while the app is closed
+    //   ReceiveSharingIntent.getInitialText().then(
+    //     (String? value) {
+    //       Logger.root.info('Received Intent initially: $value');
+    //       if (value != null) handleSharedText(value, navigatorKey);
+    //     },
+    //     onError: (err) {
+    //       Logger.root.severe('ERROR in getInitialTextStream', err);
+    //     },
+    //   );
+
+    //   // For sharing files coming from outside the app while the app is in the memory
+    //   _intentDataStreamSubscription =
+    //       ReceiveSharingIntent.getMediaStream().listen(
+    //     (List<SharedMediaFile> value) {
+    //       if (value.isNotEmpty) {
+    //         for (final file in value) {
+    //           if (file.path.endsWith('.json')) {
+    //             final List playlistNames = Hive.box('settings')
+    //                     .get('playlistNames')
+    //                     ?.toList() as List? ??
+    //                 ['Favorite Songs'];
+    //             importFilePlaylist(
+    //               null,
+    //               playlistNames,
+    //               path: file.path,
+    //               pickFile: false,
+    //             ).then(
+    //               (value) => navigatorKey.currentState?.pushNamed('/playlists'),
+    //             );
+    //           }
+    //         }
+    //       }
+    //     },
+    //     onError: (err) {
+    //       Logger.root.severe('ERROR in getDataStream', err);
+    //     },
+    //   );
+
+    //   // For sharing files coming from outside the app while the app is closed
+    //   ReceiveSharingIntent.getInitialMedia()
+    //       .then((List<SharedMediaFile> value) {
+    //     if (value.isNotEmpty) {
+    //       for (final file in value) {
+    //         if (file.path.endsWith('.json')) {
+    //           final List playlistNames = Hive.box('settings')
+    //                   .get('playlistNames')
+    //                   ?.toList() as List? ??
+    //               ['Favorite Songs'];
+    //           importFilePlaylist(
+    //             null,
+    //             playlistNames,
+    //             path: file.path,
+    //             pickFile: false,
+    //           ).then(
+    //             (value) => navigatorKey.currentState?.pushNamed('/playlists'),
+    //           );
+    //         }
+    //       }
+    //     }
+    //   });
+
+    // }
   }
 
   void setLocale(Locale value) {
