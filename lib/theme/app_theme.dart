@@ -17,6 +17,7 @@ class AppTheme {
     required BuildContext context,
   }) {
     return ThemeData(
+      primaryColor: colorPrimary,
       textSelectionTheme: TextSelectionThemeData(
         selectionHandleColor: currentTheme.currentColor(),
         cursorColor: currentTheme.currentColor(),
@@ -30,7 +31,7 @@ class AppTheme {
       ),
       listTileTheme: ListTileThemeData(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(7.0),
+          borderRadius: BorderRadius.circular(30.0),
         ),
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -41,7 +42,7 @@ class AppTheme {
         clipBehavior: Clip.antiAlias,
         elevation: 5,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(7.0),
+          borderRadius: BorderRadius.circular(30.0),
         ),
       ),
       disabledColor: Colors.grey[600],
@@ -66,8 +67,8 @@ class AppTheme {
     required BuildContext context,
   }) {
     return ThemeData(
-      fontFamily: 'Millard',
-      
+      // fontFamily: 'Millard',
+      primaryColor:colorPrimary,
       scaffoldBackgroundColor: const Color(0xff0D0D0C),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -89,7 +90,7 @@ class AppTheme {
       ),
       listTileTheme: ListTileThemeData(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(7.0),
+          borderRadius: BorderRadius.circular(30.0),
         ),
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -104,7 +105,7 @@ class AppTheme {
         clipBehavior: Clip.antiAlias,
         elevation: 5,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(7.0),
+          borderRadius: BorderRadius.circular(30.0),
         ),
       ),
       dialogBackgroundColor: currentTheme.getCardColor(),

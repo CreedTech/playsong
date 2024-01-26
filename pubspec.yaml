@@ -68,6 +68,8 @@ dependencies:
   google_fonts: ^6.1.0
   flutter_launcher_icons: ^0.13.1
   youtube_explode_dart:
+  country_icons: ^2.0.2
+  country_flags: ^2.2.0
   # receive_sharing_intent:
 
 dev_dependencies:
@@ -103,6 +105,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/
     - assets/images/
     - assets/icons/
 
@@ -118,26 +121,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Millard
+    - family: Milliard
       fonts:
-        - asset: assets/fonts/Fontspring-DEMO-millard-400-regular.otf
-          weight: 400
-        - asset: assets/fonts/Fontspring-DEMO-millard-700-bold.otf
-          weight: 700
-        # - asset: assets/fonts/Outfit-Bold.ttf
-        #   weight: 700
-        # - asset: assets/fonts/Outfit-SemiBold.ttf
-        #   weight: 600
-        # - asset: assets/fonts/Outfit-Medium.ttf
-        #   weight: 500
-        # - asset: assets/fonts/Fontspring-DEMO-millard-400-regular-italic.otf
-        #   weight: 400
-        # - asset: assets/fonts/Outfit-Light.ttf
-        #   weight: 300
-        # - asset: assets/fonts/Outfit-ExtraLight.ttf
-        #   weight: 200
-        # - asset: assets/fonts/Outfit-Thin.ttf
-          # weight: 100
+        - asset: assets/fonts/Milliard-Book-DEMO.otf
+        # - asset: fonts/Rene Bieder - Milliard Book Italic DEMO.otf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

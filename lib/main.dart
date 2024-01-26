@@ -12,11 +12,16 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:playsong/screens/home/navigation_view.dart';
 import 'package:home_widget/home_widget.dart';
+import 'package:sizer/sizer.dart';
 import 'constants/constants.dart';
+import 'constants/language_codes.dart';
 import 'helpers/config.dart';
 import 'helpers/country_codes.dart';
 import 'helpers/logging.dart';
+import 'helpers/route_handler.dart';
 import 'providers/audio_service_providers.dart';
+import 'screens/Common/routes.dart';
+import 'screens/Player/audioplayer.dart';
 import 'screens/auth/get_started.dart';
 import 'theme/app_theme.dart';
 // import 'package:receive_sharing_intent/receive_sharing_intent.dart';
@@ -41,7 +46,7 @@ Future<void> main() async {
   // await openHiveBox('Favorite Songs');
   // await openHiveBox('cache', limit: true);
   if (Platform.isAndroid) {
-    setOptimalDisplayMode();
+    // setOptimalDisplayMode();
   }
   await startService();
   runApp(MyApp());
@@ -68,25 +73,12 @@ Future<void> setOptimalDisplayMode() async {
 }
 
 Future<void> startService() async {
-  // final AudioPlayerHandler audioHandler = await AudioService.init(
-  //   builder: () => AudioPlayerHandlerImpl(),
-  //   config: AudioServiceConfig(
-  //     androidNotificationChannelId: 'com.example.playsong.channel.audio',
-  //     androidNotificationChannelName: 'BlackHole',
-  //     androidNotificationOngoing: true,
-  //     androidNotificationIcon: 'drawable/ic_stat_music_note',
-  //     androidShowNotificationBadge: true,
-  //     // androidStopForegroundOnPause: Hive.box('settings')
-  //     // .get('stopServiceOnPause', defaultValue: true) as bool,
-  //     notificationColor: Colors.grey[900],
-  //   ),
-  // );
   await initializeLogging();
   MetadataGod.initialize();
-  // final audioHandlerHelper = AudioHandlerHelper();
-  // final AudioPlayerHandler audioHandler =
-  //     await audioHandlerHelper.getAudioHandler();
-  // GetIt.I.registerSingleton<AudioPlayerHandler>(audioHandler);
+  final audioHandlerHelper = AudioHandlerHelper();
+  final AudioPlayerHandler audioHandler =
+      await audioHandlerHelper.getAudioHandler();
+  GetIt.I.registerSingleton<AudioPlayerHandler>(audioHandler);
   GetIt.I.registerSingleton<MyTheme>(MyTheme());
 }
 
@@ -269,62 +261,75 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.black38,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarIconBrightness: Brightness.dark,
-      ),
-    );
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    return MaterialApp(
-      title: 'PlaySong',
-      restorationScopeId: 'playsong',
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
-      theme: AppTheme.darkTheme(
-        context: context,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent,
+        statusBarIconBrightness: AppTheme.themeMode == ThemeMode.system
+            ? MediaQuery.platformBrightnessOf(context) == Brightness.dark
+                ? Brightness.light
+                : Brightness.dark
+            : AppTheme.themeMode == ThemeMode.dark
+                ? Brightness.light
+                : Brightness.dark,
+        systemNavigationBarIconBrightness:
+            AppTheme.themeMode == ThemeMode.system
+                ? MediaQuery.platformBrightnessOf(context) == Brightness.dark
+                    ? Brightness.light
+                    : Brightness.dark
+                : AppTheme.themeMode == ThemeMode.dark
+                    ? Brightness.light
+                    : Brightness.dark,
       ),
-      darkTheme: AppTheme.darkTheme(
-        context: context,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return OrientationBuilder(
+            builder: (context, orientation) {
+              SizerUtil.setScreenSize(constraints, orientation);
+              return MaterialApp(
+                title: 'PlaySong',
+                restorationScopeId: 'playsong',
+                debugShowCheckedModeBanner: false,
+                themeMode: AppTheme.themeMode,
+                theme: AppTheme.lightTheme(
+                  context: context,
+                ),
+                darkTheme: AppTheme.darkTheme(
+                  context: context,
+                ),
+                locale: _locale,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: LanguageCodes.languageCodes.entries
+                    .map((languageCode) => Locale(languageCode.value, ''))
+                    .toList(),
+                routes: namedRoutes,
+                navigatorKey: navigatorKey,
+                onGenerateRoute: (RouteSettings settings) {
+                  if (settings.name == '/player') {
+                    return PageRouteBuilder(
+                      opaque: false,
+                      pageBuilder: (_, __, ___) => const PlayScreen(),
+                    );
+                  }
+                  return HandleRoute.handleRoute(settings.name);
+                },
+              );
+            },
+          );
+        },
       ),
-      locale: _locale,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: ConstantCodes.languageCodes.entries
-          .map((languageCode) => Locale(languageCode.value, ''))
-          .toList(),
-      routes: {
-        '/': (context) => initialFuntion(),
-        '/getStarted': (context) => const GetStarted(),
-        '/home': (context) => const NavigationView(),
-        // '/setting': (context) => const SettingPage(),
-        // '/about': (context) => AboutScreen(),
-        // '/playlists': (context) => PlaylistScreen(),
-        // '/nowplaying': (context) => NowPlaying(),
-        // '/recent': (context) => RecentlyPlayed(),
-        // '/downloads': (context) => const Downloads(),
-      },
-      navigatorKey: navigatorKey,
-      // onGenerateRoute: (RouteSettings settings) {
-      //   if (settings.name == '/player') {
-      //     return PageRouteBuilder(
-      //       opaque: false,
-      //       pageBuilder: (_, __, ___) => const PlayScreen(),
-      //     );
-      //   }
-      //   return HandleRoute.handleRoute(settings.name);
-      // },
     );
   }
 }

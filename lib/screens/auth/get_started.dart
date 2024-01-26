@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:playsong/theme/app_theme.dart';
 
 class GetStarted extends StatefulWidget {
@@ -14,7 +15,7 @@ class _GetStartedState extends State<GetStarted> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 112, left: 41, right: 41),
+          padding: const EdgeInsets.only(top: 112, left: 16, right: 16),
           child: Center(
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
@@ -24,63 +25,78 @@ class _GetStartedState extends State<GetStarted> {
                   'assets/images/playsong_logo.png',
                   width: 64,
                 ),
-                const Text(
+                 Text(
                   'PlaySong',
-                  style: TextStyle(
+                  style: GoogleFonts.hind(
                     fontWeight: FontWeight.w700,
                     fontSize: 24,
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 32),
+                 Padding(
+                  padding: EdgeInsets.symmetric(vertical: 24),
                   child: Text(
                     'Your gateway to melody',
-                    style: TextStyle(
+                    style: GoogleFonts.hind(
                       fontWeight: FontWeight.w600,
-                      fontSize: 16,
+                      fontSize: 18,
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 65,
                 ),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(width: 2, color: Colors.white),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 33, horizontal: 12),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                    ),
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 6),
-                          child: Row(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
+                          child: Column(
                             children: [
-                              Icon(
-                                Icons.star,
-                                color: colorPrimary,
-                                size: 12,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 9),
-                                child: SizedBox(
-                                  width: 263,
-                                  child: Text(
-                                    'Channel for buying song,',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  for (var i = 0; i <= 5; i++)
+                                    const Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: 5,
+                                      ),
+                                      child: Icon(
+                                        Icons.star,
+                                        color: colorPrimary,
+                                        size: 12,
+                                      ),
                                     ),
+                                ],
+                              ),
+                               Padding(
+                                padding: EdgeInsets.only(left: 10, right: 10),
+                                child: Text(
+                                  'All-in-one music hub: Purchase songs, manage your personalized wallet with easy fund sharing, download favorite tunes and albums, and effortlessly search and filter songs and lyrics.',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.hind(
+                                    fontWeight: FontWeight.w400,
+                                    // height: 1.3,
+                                    fontSize: 12,
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                     ],
+                      ],
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 133),
+                  padding: const EdgeInsets.only(top: 233),
                   child: Column(
                     children: [
                       ElevatedButton(
@@ -94,11 +110,13 @@ class _GetStartedState extends State<GetStarted> {
                             ),
                           ),
                         ),
-                        onPressed: () {},
-                        child: const Text(
+                        onPressed: () {
+                           Navigator.of(context).pushNamed('/welcome');
+                        },
+                        child:  Text(
                           'Create free account',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: GoogleFonts.hind(
                             color: Colors.black,
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -122,10 +140,10 @@ class _GetStartedState extends State<GetStarted> {
                         onPressed: () {
                           Navigator.of(context).popAndPushNamed('/home');
                         },
-                        child: const Text(
+                        child:  Text(
                           'Log in',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: GoogleFonts.hind(
                             color: colorPrimary,
                             fontSize: 12,
                             fontWeight: FontWeight.w500,

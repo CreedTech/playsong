@@ -1,5 +1,3 @@
-//
-
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -27,7 +25,7 @@ class BouncyPlaylistHeaderScrollView extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.secondarySubtitle,
-    this.placeholderImage = 'assets/cover.jpg',
+    this.placeholderImage = 'assets/icons/cover.jpg',
     this.localImage = false,
     this.imageUrl,
     this.actions,
@@ -197,7 +195,7 @@ class BouncyPlaylistHeaderScrollView extends StatelessWidget {
                                                 color: Colors.black26,
                                                 blurRadius: 5.0,
                                                 offset: Offset(0.0, 3.0),
-                                              )
+                                              ),
                                             ],
                                           ),
                                           child: Padding(
@@ -304,6 +302,7 @@ class BouncyPlaylistHeaderScrollView extends StatelessWidget {
               centerTitle: true,
               // floating: true,
               backgroundColor: isTransparent.value ? Colors.transparent : null,
+              iconTheme: Theme.of(context).iconTheme,
               expandedHeight: expandedHeight,
               actions: actions,
               flexibleSpace: child,

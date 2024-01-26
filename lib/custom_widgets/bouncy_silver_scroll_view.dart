@@ -21,7 +21,7 @@ class BouncyImageSliverScrollView extends StatelessWidget {
     this.shrinkWrap = false,
     required this.sliverList,
     required this.title,
-    this.placeholderImage = 'assets/cover.jpg',
+    this.placeholderImage = 'assets/icons/cover.jpg',
     this.localImage = false,
     this.imageUrl,
     this.actions,

@@ -1,5 +1,3 @@
-//
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -160,7 +158,7 @@ class MyTheme with ChangeNotifier {
     if (_useSystemTheme == true) {
       return ThemeMode.system;
     } else {
-      return _isDark ? ThemeMode.dark : ThemeMode.dark;
+      return _isDark ? ThemeMode.dark : ThemeMode.light;
     }
   }
 
@@ -211,9 +209,9 @@ class MyTheme with ChangeNotifier {
   }
 
   Color getCanvasColor() {
-    if (canvasColor == 'Black') return const Color(0xff0D0D0C);
-    // if (canvasColor == 'Grey') return Colors.grey[900]!;
-    return const Color(0xff0D0D0C);
+    if (canvasColor == 'Black') return Colors.black;
+    if (canvasColor == 'Grey') return Colors.grey[900]!;
+    return Colors.grey[900]!;
   }
 
   void switchCanvasColor(String color, {bool notify = true}) {
@@ -301,20 +299,23 @@ class MyTheme with ChangeNotifier {
   void saveTheme(String themeName) {
     final userThemes =
         Hive.box('settings').get('userThemes', defaultValue: {}) as Map;
-    Hive.box('settings').put('userThemes', {
-      ...userThemes,
-      themeName: {
-        'isDark': _isDark,
-        'useSystemTheme': _useSystemTheme,
-        'accentColor': accentColor,
-        'canvasColor': canvasColor,
-        'cardColor': cardColor,
-        'backGrad': backGrad,
-        'cardGrad': cardGrad,
-        'bottomGrad': bottomGrad,
-        'colorHue': colorHue,
-      }
-    });
+    Hive.box('settings').put(
+      'userThemes',
+      {
+        ...userThemes,
+        themeName: {
+          'isDark': _isDark,
+          'useSystemTheme': _useSystemTheme,
+          'accentColor': accentColor,
+          'canvasColor': canvasColor,
+          'cardColor': cardColor,
+          'backGrad': backGrad,
+          'cardGrad': cardGrad,
+          'bottomGrad': bottomGrad,
+          'colorHue': colorHue,
+        },
+      },
+    );
   }
 
   void deleteTheme(String themeName) {

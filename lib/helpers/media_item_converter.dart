@@ -1,6 +1,10 @@
-//
+
 
 import 'package:audio_service/audio_service.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+
+import '../models/song_item.dart';
+import '../models/url_image_generator.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class MediaItemConverter {
@@ -33,6 +37,7 @@ class MediaItemConverter {
     Map song, {
     bool addedByAutoplay = false,
     bool autoplay = true,
+    String? playlistBox,
   }) {
     return MediaItem(
       id: song['id'].toString(),
@@ -40,17 +45,16 @@ class MediaItemConverter {
       artist: song['artist'].toString(),
       duration: Duration(
         seconds: int.parse(
-          (song['duration'] == null || song['duration'] == 'null')
+          (song['duration'] == null ||
+                  song['duration'] == 'null' ||
+                  song['duration'] == '')
               ? '180'
               : song['duration'].toString(),
         ),
       ),
       title: song['title'].toString(),
       artUri: Uri.parse(
-        song['image']
-            .toString()
-            .replaceAll('50x50', '500x500')
-            .replaceAll('150x150', '500x500'),
+        UrlImageGetter([song['image'].toString()]).highQuality,
       ),
       genre: song['language'].toString(),
       extras: {
@@ -66,9 +70,10 @@ class MediaItemConverter {
         'album_id': song['album_id'],
         'subtitle': song['subtitle'],
         'perma_url': song['perma_url'],
+        'expire_at': song['expire_at'],
         'addedByAutoplay': addedByAutoplay,
         'autoplay': autoplay,
-        'expire_at': song['expire_at'],
+        'playlistBox': playlistBox,
       },
     );
   }
@@ -80,7 +85,9 @@ class MediaItemConverter {
       artist: song['artist'].toString(),
       duration: Duration(
         seconds: int.parse(
-          (song['duration'] == null || song['duration'] == 'null')
+          (song['duration'] == null ||
+                  song['duration'] == 'null' ||
+                  song['duration'] == '')
               ? '180'
               : song['duration'].toString(),
         ),
@@ -98,5 +105,61 @@ class MediaItemConverter {
         'quality': song['quality'],
       },
     );
+  }
+
+  static MediaItem songItemToMediaItem({
+    required SongItem songItem,
+    bool addedByAutoplay = false,
+    bool autoplay = true,
+    String? playlistBox,
+  }) {
+    return MediaItem(
+      id: songItem.id,
+      album: songItem.album,
+      artist: songItem.artists.join(', '),
+      duration: songItem.duration,
+      title: songItem.title,
+      artUri: Uri.parse(
+        UrlImageGetter([songItem.image]).highQuality,
+      ),
+      genre: songItem.genre,
+      extras: {
+        'url': songItem.url,
+        'allUrl': songItem.allUrls,
+        'year': songItem.year,
+        'language': songItem.language,
+        '320kbps': songItem.kbps320,
+        'quality': songItem.quality,
+        'has_lyrics': songItem.hasLyrics,
+        'release_date': songItem.releaseDate,
+        'album_id': songItem.albumId,
+        'subtitle': songItem.subtitle,
+        'perma_url': songItem.permaUrl,
+        'expire_at': songItem.expireAt,
+        'addedByAutoplay': addedByAutoplay,
+        'autoplay': autoplay,
+        'playlistBox': playlistBox,
+      },
+    );
+  }
+
+  static Map<String, dynamic> videoToMap(Video video) {
+    return {
+      'id': video.id.value,
+      'album': video.author.replaceAll('- Topic', '').trim(),
+      'duration': video.duration?.inSeconds ?? 180,
+      'title': video.title.trim(),
+      'artist': video.author.replaceAll('- Topic', '').trim(),
+      'image': video.thumbnails.highResUrl,
+      'language': 'YouTube',
+      'genre': 'YouTube',
+      'year': video.uploadDate?.year,
+      '320kbps': false,
+      'has_lyrics': false,
+      'release_date': video.publishDate.toString(),
+      'album_id': video.channelId.value,
+      'subtitle': video.author,
+      'perma_url': video.url,
+    };
   }
 }
