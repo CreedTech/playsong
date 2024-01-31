@@ -52,6 +52,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     }
 
     return Scaffold(
+      
       appBar: AppBar(
         // toolbarHeight: 70,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,

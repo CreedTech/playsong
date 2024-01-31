@@ -1,11 +1,10 @@
-
-
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../screens/Player/audioplayer.dart';
+import 'download_button.dart';
 import 'gradient_containers.dart';
 import 'image_card.dart';
 
@@ -81,8 +80,8 @@ class _MiniPlayerState extends State<MiniPlayer> {
                 ),
                 color: const Color(0xff141413),
                 shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
+                  borderRadius: BorderRadius.circular(0.0),
+                ),
                 elevation: 0,
                 child: SizedBox(
                   child: Column(
@@ -104,7 +103,6 @@ class _MiniPlayerState extends State<MiniPlayer> {
                         isLocalImage: isLocal,
                         isDummy: mediaItem == null,
                       ),
-                      
                     ],
                   ),
                 ),
@@ -134,12 +132,12 @@ class _MiniPlayerState extends State<MiniPlayer> {
               Navigator.pushNamed(context, '/player');
             },
       title: Text(
-        isDummy ? 'Now Playing' : title,
+        isDummy ? 'Desire' : title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
-        isDummy ? 'Unknown' : subtitle,
+        isDummy ? 'TJM Moslaw' : subtitle,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
@@ -150,17 +148,180 @@ class _MiniPlayerState extends State<MiniPlayer> {
           boxDimension: useDense ? 40.0 : 50.0,
           localImage: isLocalImage,
           imageUrl: isLocalImage ? imagePath : imagePath,
+          placeholderImage: const AssetImage(
+            'assets/images/music_wall.png',
+          ),
         ),
       ),
-      trailing: isDummy
-          ? null
-          : ControlButtons(
-              audioHandler,
-              miniplayer: true,
-              buttons: isLocalImage
-                  ? ['Like', 'Play/Pause', 'Next']
-                  : preferredMiniButtons,
-            ),
+      trailing: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.min,
+        children: ['Like', 'Play/Pause', 'Next'].map((e) {
+          switch (e) {
+            case 'Like':
+              return const SizedBox();
+            // // !online ?
+            //     // const SizedBox()
+            //     // :
+            //     LikeButton(
+            //         mediaItem: mediaItem,
+            //         size: 22.0,
+            //       );
+            case 'Previous':
+              return StreamBuilder<QueueState>(
+                stream: audioHandler.queueState,
+                builder: (context, snapshot) {
+                  final queueState = snapshot.data;
+                  return IconButton(
+                    icon: const Icon(
+                      Icons.skip_previous_rounded,
+                      color: Colors.white,
+                    ),
+                    iconSize: 30.0,
+                    tooltip: AppLocalizations.of(context)!.skipPrevious,
+                    color: Theme.of(context).primaryColor,
+                    onPressed: queueState?.hasPrevious ?? true
+                        ? audioHandler.skipToPrevious
+                        : null,
+                  );
+                },
+              );
+            case 'Play/Pause':
+              return SizedBox(
+                height: 65.0,
+                width: 65.0,
+                child: StreamBuilder<PlaybackState>(
+                  stream: audioHandler.playbackState,
+                  builder: (context, snapshot) {
+                    final playbackState = snapshot.data;
+                    final processingState = playbackState?.processingState;
+                    final playing = playbackState?.playing ?? true;
+                    return Stack(
+                      children: [
+                        if (processingState == AudioProcessingState.loading ||
+                            processingState == AudioProcessingState.buffering)
+                          Center(
+                            child: SizedBox(
+                              height: 45.0,
+                              width: 45.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        // if (miniplayer)
+                        Center(
+                          child: playing
+                              ? Center(
+                                  child: IconButton(
+                                    // tooltip:
+                                    //     AppLocalizations.of(context)!.pause,
+                                    onPressed: audioHandler.pause,
+                                    icon: const Icon(
+                                      Icons.pause_circle_outline,
+                                      size: 25,
+                                    ),
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                )
+                              : Center(
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    tooltip: AppLocalizations.of(context)!.play,
+                                    onPressed: audioHandler.play,
+                                    icon: const Icon(
+                                      Icons.play_circle_outline_outlined,
+                                      size: 25,
+                                    ),
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                        )
+                        // else
+                        // Center(
+                        //   child: SizedBox(
+                        //     height: 59,
+                        //     width: 59,
+                        //     child: Center(
+                        //       child: playing
+                        //           ? FloatingActionButton(
+                        //               elevation: 10,
+                        //               tooltip:
+                        //                   AppLocalizations.of(context)!.pause,
+                        //               backgroundColor: Colors.white,
+                        //               onPressed: audioHandler.pause,
+                        //               child: const Icon(
+                        //                 Icons.pause_rounded,
+                        //                 size: 40.0,
+                        //                 color: Colors.black,
+                        //               ),
+                        //             )
+                        //           : FloatingActionButton(
+                        //               elevation: 10,
+                        //               tooltip:
+                        //                   AppLocalizations.of(context)!.play,
+                        //               backgroundColor: Colors.white,
+                        //               onPressed: audioHandler.play,
+                        //               child: const Icon(
+                        //                 Icons.play_arrow_rounded,
+                        //                 size: 40.0,
+                        //                 color: Colors.black,
+                        //               ),
+                        //             ),
+                        //     ),
+                        //   ),
+                        // ),
+                      ],
+                    );
+                  },
+                ),
+              );
+            case 'Next':
+              return StreamBuilder<QueueState>(
+                stream: audioHandler.queueState,
+                builder: (context, snapshot) {
+                  final queueState = snapshot.data;
+                  return IconButton(
+                    icon: const Icon(
+                      Icons.skip_next_rounded,
+                      color: Colors.white,
+                    ),
+                    iconSize: 30.0,
+                    tooltip: AppLocalizations.of(context)!.skipNext,
+                    color: Theme.of(context).primaryColor,
+                    onPressed: queueState?.hasNext ?? true
+                        ? audioHandler.skipToNext
+                        : null,
+                  );
+                },
+              );
+            case 'Download':
+              return
+                  // !online
+                  // ?
+                  const SizedBox();
+            // : DownloadButton(
+            //     size: 20.0,
+            //     icon: 'download',
+            //     data: MediaItemConverter.mediaItemToMap(mediaItem),
+            //   );
+            default:
+              break;
+          }
+          return const SizedBox();
+        }).toList(),
+      ),
+      // trailing: isDummy
+      //     ? null
+      //     : ControlButtons(
+      //         audioHandler,
+      //         miniplayer: true,
+      //         buttons: isLocalImage
+      //             ? ['Like', 'Play/Pause', 'Next']
+      //             : preferredMiniButtons,
+      //       ),
     );
   }
 
@@ -191,7 +352,8 @@ class _MiniPlayerState extends State<MiniPlayer> {
                   child: Slider(
                     inactiveColor: Colors.transparent,
                     // activeColor: Colors.white,
-                    value: position?.inSeconds.toDouble() ?? 0,
+                    // value: position?.inSeconds.toDouble() ?? 70,
+                    value: position?.inSeconds.toDouble() ?? 70,
                     max: maxDuration ?? 180.0,
                     onChanged: (newPosition) {
                       audioHandler.seek(

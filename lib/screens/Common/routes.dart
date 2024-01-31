@@ -16,6 +16,7 @@ Widget initialFuntion() {
 
 final Map<String, Widget Function(BuildContext)> namedRoutes = {
   '/': (context) => initialFuntion(),
+  // '/home': (context) => const HomePage(),
   '/home': (context) => const HomePage(),
   '/welcome': (context) => const WelcomeScreen(),
   '/username': (context) => const UsernamePage(),

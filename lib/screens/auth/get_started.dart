@@ -33,7 +33,7 @@ class _GetStartedState extends State<GetStarted> {
                   ),
                 ),
                  Padding(
-                  padding: EdgeInsets.symmetric(vertical: 24),
+                  padding: const EdgeInsets.symmetric(vertical: 24),
                   child: Text(
                     'Your gateway to melody',
                     style: GoogleFonts.hind(
@@ -77,7 +77,7 @@ class _GetStartedState extends State<GetStarted> {
                                 ],
                               ),
                                Padding(
-                                padding: EdgeInsets.only(left: 10, right: 10),
+                                padding: const EdgeInsets.only(left: 10, right: 10),
                                 child: Text(
                                   'All-in-one music hub: Purchase songs, manage your personalized wallet with easy fund sharing, download favorite tunes and albums, and effortlessly search and filter songs and lyrics.',
                                   textAlign: TextAlign.center,

@@ -102,7 +102,8 @@ class _CountrySelectionPageState extends State<CountrySelectionPage> {
                                   children: [
                                     Form(
                                       key: countryFormKey,
-                                      child: TextFormField(
+                                      child: 
+                                      TextFormField(
                                         onTap: () {
                                           showModalBottomSheet(
                                             isDismissible: true,

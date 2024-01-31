@@ -9,6 +9,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:playsong/screens/Explore/explore_page.dart';
 import 'package:playsong/screens/Search/search_page.dart';
 import 'package:playsong/screens/home/home_screen.dart';
+import 'package:playsong/screens/home/homepage_view.dart';
 import 'package:playsong/screens/settings/settings_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../custom_widgets/bottom_nav_bar.dart';
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.pop(context);
                   launchUrl(
-                    Uri.parse('https://sangwan5688.github.io/download/'),
+                    Uri.parse(''),
                     mode: LaunchMode.externalApplication,
                   );
                 },
@@ -150,7 +151,7 @@ class _HomePageState extends State<HomePage> {
         ) as String;
         if (autoBackPath == '') {
           ExtStorageProvider.getExtStorage(
-            dirName: 'BlackHole/Backups',
+            dirName: 'PlaySong/Backups',
             writeAccess: true,
           ).then((value) {
             Hive.box('settings').put('autoBackPath', value);
@@ -159,7 +160,7 @@ class _HomePageState extends State<HomePage> {
               checked,
               boxNames,
               path: value,
-              fileName: 'BlackHole_AutoBackup',
+              fileName: 'PlaySong_AutoBackup',
               showDialog: false,
             );
           });
@@ -169,7 +170,7 @@ class _HomePageState extends State<HomePage> {
             checked,
             boxNames,
             path: autoBackPath,
-            fileName: 'BlackHole_AutoBackup',
+            fileName: 'PlaySong_AutoBackup',
             showDialog: false,
           );
         }
@@ -358,7 +359,8 @@ class _HomePageState extends State<HomePage> {
               screens: sectionsToShow.map((e) {
                 switch (e) {
                   case 'Spotlight':
-                    return const SafeArea(child: HomeScreen());
+                    // return const SafeArea(child: HomeScreen());
+                    return const SafeArea(child: HomePageView());
                   case 'Explore':
                     return const SafeArea(
                       child: ExplorePage(),
