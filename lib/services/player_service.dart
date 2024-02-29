@@ -204,7 +204,7 @@ class PlayerInvoke {
           Logger.root
               .info('youtube link expired in cache for ${playItem["title"]}');
           final newData =
-              await YouTubeServices().refreshLink(playItem['id'].toString());
+              await YouTubeServices.instance.refreshLink(playItem['id'].toString());
           Logger.root.info(
             'before service | received new link for ${playItem["title"]}',
           );
@@ -221,7 +221,7 @@ class PlayerInvoke {
         }
       } else {
         final newData =
-            await YouTubeServices().refreshLink(playItem['id'].toString());
+            await YouTubeServices.instance.refreshLink(playItem['id'].toString());
         Logger.root.info(
           'before service | received new link for ${playItem["title"]}',
         );

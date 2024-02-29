@@ -138,7 +138,7 @@ class _GetStartedState extends State<GetStarted> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).popAndPushNamed('/home');
+                          Navigator.of(context).popAndPushNamed('/login');
                         },
                         child:  Text(
                           'Log in',

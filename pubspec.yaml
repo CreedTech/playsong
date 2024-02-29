@@ -61,7 +61,6 @@ dependencies:
   salomon_bottom_bar:
   share_plus:
   sliding_up_panel:
-  metadata_god: ^0.5.2+1
   url_launcher:
   workmanager:
   uuid:
@@ -70,6 +69,7 @@ dependencies:
   youtube_explode_dart:
   country_icons: ^2.0.2
   country_flags: ^2.2.0
+  super_cupertino_navigation_bar: ^2.1.2
   # receive_sharing_intent:
 
 dev_dependencies:
@@ -83,7 +83,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
-flutter_icons:
+flutter_launcher_icons:
  image_path: "assets/images/app_icon.png"
 #  adaptive_icon_foreground: "assets/images/app_icon.png"
  android: true

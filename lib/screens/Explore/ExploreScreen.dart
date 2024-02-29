@@ -7,7 +7,6 @@ import 'package:sizer/sizer.dart';
 
 import '../../constants/country_codes.dart';
 import '../../custom_widgets/app_scrolling.dart';
-import '../../custom_widgets/custom_physics.dart';
 import '../../custom_widgets/gradient_containers.dart';
 import '../../custom_widgets/image_card.dart';
 import '../../custom_widgets/on_hover.dart';
@@ -250,17 +249,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.only(top: 18, left: 16, right: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      15,
-                      10,
-                      15,
-                      5,
-                    ),
+                    padding: const EdgeInsets.only(bottom: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -303,7 +297,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    height: (boxSize + 20) * 2,
+                    height: (boxSize + 25) * 2,
                     child: ScrollConfiguration(
                       behavior: AppScrollBehavior(),
                       child: GridView(
@@ -319,7 +313,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             .map((title) => HoverBox(
                                 child: imageCard(
                                   margin: const EdgeInsets.symmetric(
-                                      horizontal: 4, vertical: 4.0),
+                                      horizontal: 2, vertical: 4.0),
                                   borderRadius: 2.4,
                                   imageUrl: 'assets/images/mixes.png',
                                   imageQuality: ImageQuality.medium,
@@ -393,7 +387,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0,
+                                            horizontal: 0.0,
                                           ),
                                           child: Column(
                                             mainAxisAlignment:
@@ -442,176 +436,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       ),
                     ),
                   ),
-                  // SizedBox(
-                  //     height: (boxSize + 10) * 2,
-                  //     child: SingleChildScrollView(
-                  //       scrollDirection: Axis.horizontal,
-                  //       child: SingleChildScrollView(
-                  //         scrollDirection: Axis.vertical,
-                  //         child: Column(
-                  //           children: List.generate(2, (row) {
-                  //             return Row(
-                  //               children: List.generate(8, (col) {
-                  //                 return GestureDetector(
-                  //                   child: SizedBox(
-                  //                     width: boxSize - 20,
-                  //                     child: HoverBox(
-                  //                         child: imageCard(
-                  //                           margin: const EdgeInsets.symmetric(
-                  //                               horizontal: 4, vertical: 4.0),
-                  //                           borderRadius: 2.4,
-                  //                           imageUrl: 'assets/images/mixes.png',
-                  //                           imageQuality: ImageQuality.medium,
-                  //                           placeholderImage: const AssetImage(
-                  //                             'assets/images/mixes.png',
-                  //                           ),
-                  //                         ),
-                  //                         builder: ({
-                  //                           required BuildContext context,
-                  //                           required bool isHover,
-                  //                           Widget? child,
-                  //                         }) {
-                  //                           return Card(
-                  //                             color: isHover
-                  //                                 ? null
-                  //                                 : Colors.transparent,
-                  //                             elevation: 0,
-                  //                             margin: EdgeInsets.zero,
-                  //                             shape: RoundedRectangleBorder(
-                  //                               borderRadius:
-                  //                                   BorderRadius.circular(
-                  //                                 2.4,
-                  //                               ),
-                  //                             ),
-                  //                             clipBehavior: Clip.antiAlias,
-                  //                             child: Column(
-                  //                               mainAxisAlignment:
-                  //                                   MainAxisAlignment.start,
-                  //                               crossAxisAlignment:
-                  //                                   CrossAxisAlignment.start,
-                  //                               children: [
-                  //                                 Stack(
-                  //                                   children: [
-                  //                                     SizedBox.square(
-                  //                                       dimension: isHover
-                  //                                           ? boxSize - 25
-                  //                                           : boxSize - 30,
-                  //                                       child: child,
-                  //                                     ),
-                  //                                     if (isHover)
-                  //                                       Positioned.fill(
-                  //                                         child: Container(
-                  //                                           margin:
-                  //                                               const EdgeInsets
-                  //                                                   .all(
-                  //                                             4.0,
-                  //                                           ),
-                  //                                           decoration:
-                  //                                               BoxDecoration(
-                  //                                             color: Colors
-                  //                                                 .black54,
-                  //                                             borderRadius:
-                  //                                                 BorderRadius
-                  //                                                     .circular(
-                  //                                               10.0,
-                  //                                             ),
-                  //                                           ),
-                  //                                           child: Center(
-                  //                                             child:
-                  //                                                 DecoratedBox(
-                  //                                               decoration:
-                  //                                                   BoxDecoration(
-                  //                                                 color: Colors
-                  //                                                     .black87,
-                  //                                                 borderRadius:
-                  //                                                     BorderRadius
-                  //                                                         .circular(
-                  //                                                   1000.0,
-                  //                                                 ),
-                  //                                               ),
-                  //                                               child:
-                  //                                                   const Icon(
-                  //                                                 Icons
-                  //                                                     .play_arrow_rounded,
-                  //                                                 size: 50.0,
-                  //                                                 color: Colors
-                  //                                                     .white,
-                  //                                               ),
-                  //                                             ),
-                  //                                           ),
-                  //                                         ),
-                  //                                       ),
-                  //                                   ],
-                  //                                 ),
-                  //                                 Padding(
-                  //                                   padding: const EdgeInsets
-                  //                                       .symmetric(
-                  //                                     horizontal: 10.0,
-                  //                                   ),
-                  //                                   child: Column(
-                  //                                     mainAxisAlignment:
-                  //                                         MainAxisAlignment
-                  //                                             .start,
-                  //                                     crossAxisAlignment:
-                  //                                         CrossAxisAlignment
-                  //                                             .start,
-                  //                                     children: [
-                  //                                       Padding(
-                  //                                         padding:
-                  //                                             const EdgeInsets
-                  //                                                 .only(
-                  //                                           right: 10,
-                  //                                         ),
-                  //                                         child: Text(
-                  //                                           'Vishing',
-                  //                                           textAlign:
-                  //                                               TextAlign.left,
-                  //                                           softWrap: false,
-                  //                                           maxLines: 2,
-                  //                                           overflow:
-                  //                                               TextOverflow
-                  //                                                   .ellipsis,
-                  //                                           style: GoogleFonts
-                  //                                               .hind(
-                  //                                             fontWeight:
-                  //                                                 FontWeight
-                  //                                                     .w500,
-                  //                                           ),
-                  //                                         ),
-                  //                                       ),
-                  //                                       Text(
-                  //                                         'Shugar',
-                  //                                         textAlign:
-                  //                                             TextAlign.left,
-                  //                                         softWrap: true,
-                  //                                         maxLines: 2,
-                  //                                         overflow: TextOverflow
-                  //                                             .ellipsis,
-                  //                                         style:
-                  //                                             GoogleFonts.hind(
-                  //                                           fontSize: 11,
-                  //                                           color: Theme.of(
-                  //                                                   context)
-                  //                                               .textTheme
-                  //                                               .bodySmall!
-                  //                                               .color,
-                  //                                         ),
-                  //                                       ),
-                  //                                     ],
-                  //                                   ),
-                  //                                 ),
-                  //                               ],
-                  //                             ),
-                  //                           );
-                  //                         }),
-                  //                   ),
-                  //                 );
-                  //               }),
-                  //             );
-                  //           }),
-                  //         ),
-                  //       ),
-                  //     )),
                 ],
               ),
             ),
@@ -620,9 +444,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
               child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(
-                    15,
-                    10,
-                    15,
+                    16,
+                    14,
+                    16,
                     5,
                   ),
                   child: Row(
@@ -881,295 +705,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     ),
                   ),
                 ),
-                // SizedBox(
-                //   height: (boxSize + 65),
-                //   child: ListView.builder(
-                //       physics: const BouncingScrollPhysics(),
-                //       scrollDirection:
-                //           Axis.vertical, // Vertical scroll for the outer list
-                //       itemCount: 4,
-                //       itemBuilder: (context, rowIndex) {
-                //         final startIndex = rowIndex * 6;
-                //         final endIndex = (rowIndex + 1) * 6;
-                //         final items = [
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //           '',
-                //         ].sublist(startIndex, endIndex);
-                //         return SizedBox(
-                //           height: 62,
-                //           child: ListView.builder(
-                //               physics: PagingScrollPhysics(
-                //                   itemDimension:
-                //                       MediaQuery.of(context).size.width * 0.9),
-                //               scrollDirection: Axis.horizontal,
-                //               itemExtent:
-                //                   MediaQuery.of(context).size.width * 0.9,
-                //               itemCount: items.length,
-                //               itemBuilder: (context, index) {
-                //                 // Map item;
-                //                 // item = data[lists[1]][index] as Map;
-                //                 return ListTile(
-                //                   dense: false,
-                //                   onTap: () {
-                //                     Navigator.pushNamed(context, '/player');
-                //                   },
-                //                   title: Text(
-                //                     'Burna Boy',
-                //                     maxLines: 2,
-                //                     overflow: TextOverflow.ellipsis,
-                //                     style: GoogleFonts.hind(
-                //                       fontSize: 12,
-                //                       fontWeight: FontWeight.w600,
-                //                     ),
-                //                   ),
-                //                   subtitle: Text(
-                //                     '55.2k followers',
-                //                     maxLines: 1,
-                //                     overflow: TextOverflow.ellipsis,
-                //                     style: GoogleFonts.hind(
-                //                       fontSize: 12,
-                //                       fontWeight: FontWeight.w500,
-                //                     ),
-                //                   ),
-                //                   leading: Row(
-                //                     mainAxisAlignment:
-                //                         MainAxisAlignment.spaceBetween,
-                //                     mainAxisSize: MainAxisSize.min,
-                //                     children: [
-                //                       Text((rowIndex + 1).toString()),
-                //                       SizedBox(
-                //                         width: 13.sp,
-                //                       ),
-                //                       Hero(
-                //                         tag: 'currentArtwork',
-                //                         child: imageCard(
-                //                           elevation: 8,
-                //                           boxDimension: 50.0,
-                //                           localImage: true,
-                //                           borderRadius: 100,
-                //                           imageUrl:
-                //                               'assets/images/customised.png',
-                //                           imageQuality: ImageQuality.medium,
-                //                           placeholderImage: const AssetImage(
-                //                             'assets/images/customised.png',
-                //                           ),
-                //                         ),
-                //                       ),
-                //                     ],
-                //                   ),
-                //                   trailing: PopupMenuButton(
-                //                     icon: Icon(
-                //                       Icons.more_vert_rounded,
-                //                       color: Theme.of(context).iconTheme.color,
-                //                       size: 15,
-                //                       weight: 3,
-                //                     ),
-                //                     shape: const RoundedRectangleBorder(
-                //                       borderRadius: BorderRadius.all(
-                //                         Radius.circular(15.0),
-                //                       ),
-                //                     ),
-                //                     itemBuilder: (context) => [
-                //                       PopupMenuItem(
-                //                         value: 6,
-                //                         child: Row(
-                //                           children: [
-                //                             const Icon(
-                //                               Icons.delete_rounded,
-                //                             ),
-                //                             const SizedBox(
-                //                               width: 10.0,
-                //                             ),
-                //                             Text(
-                //                               AppLocalizations.of(
-                //                                 context,
-                //                               )!
-                //                                   .remove,
-                //                             ),
-                //                           ],
-                //                         ),
-                //                       ),
-                //                       PopupMenuItem(
-                //                         value: 2,
-                //                         child: Row(
-                //                           children: [
-                //                             Icon(
-                //                               Icons.playlist_play_rounded,
-                //                               color: Theme.of(context)
-                //                                   .iconTheme
-                //                                   .color,
-                //                               size: 26.0,
-                //                             ),
-                //                             const SizedBox(width: 10.0),
-                //                             Text(AppLocalizations.of(context)!
-                //                                 .playNext),
-                //                           ],
-                //                         ),
-                //                       ),
-                //                       PopupMenuItem(
-                //                         value: 1,
-                //                         child: Row(
-                //                           children: [
-                //                             Icon(
-                //                               Icons.queue_music_rounded,
-                //                               color: Theme.of(context)
-                //                                   .iconTheme
-                //                                   .color,
-                //                             ),
-                //                             const SizedBox(width: 10.0),
-                //                             Text(AppLocalizations.of(context)!
-                //                                 .addToQueue),
-                //                           ],
-                //                         ),
-                //                       ),
-                //                       PopupMenuItem(
-                //                         value: 0,
-                //                         child: Row(
-                //                           children: [
-                //                             Icon(
-                //                               Icons.playlist_add_rounded,
-                //                               color: Theme.of(context)
-                //                                   .iconTheme
-                //                                   .color,
-                //                             ),
-                //                             const SizedBox(width: 10.0),
-                //                             Text(AppLocalizations.of(context)!
-                //                                 .addToPlaylist),
-                //                           ],
-                //                         ),
-                //                       ),
-                //                       PopupMenuItem(
-                //                         value: 4,
-                //                         child: Row(
-                //                           children: [
-                //                             Icon(
-                //                               Icons.album_rounded,
-                //                               color: Theme.of(context)
-                //                                   .iconTheme
-                //                                   .color,
-                //                             ),
-                //                             const SizedBox(width: 10.0),
-                //                             Text(AppLocalizations.of(context)!
-                //                                 .viewAlbum),
-                //                           ],
-                //                         ),
-                //                       ),
-                //                       PopupMenuItem(
-                //                         value: 'artist',
-                //                         child: SingleChildScrollView(
-                //                           scrollDirection: Axis.horizontal,
-                //                           child: Row(
-                //                             children: [
-                //                               Icon(
-                //                                 Icons.person_rounded,
-                //                                 color: Theme.of(context)
-                //                                     .iconTheme
-                //                                     .color,
-                //                               ),
-                //                               const SizedBox(width: 10.0),
-                //                               Text(
-                //                                 '${AppLocalizations.of(context)!.viewArtist} Test',
-                //                               ),
-                //                             ],
-                //                           ),
-                //                         ),
-                //                       ),
-                //                       PopupMenuItem(
-                //                         value: 3,
-                //                         child: Row(
-                //                           children: [
-                //                             Icon(
-                //                               Icons.share_rounded,
-                //                               color: Theme.of(context)
-                //                                   .iconTheme
-                //                                   .color,
-                //                             ),
-                //                             const SizedBox(width: 10.0),
-                //                             Text(AppLocalizations.of(context)!
-                //                                 .share),
-                //                           ],
-                //                         ),
-                //                       ),
-                //                     ],
-                //                     onSelected: (value) {
-                //                       switch (value) {
-                //                         case 3:
-                //                           Share.share('');
-                //                           break;
-
-                //                         case 4:
-                //                           // TODO come back here!!!
-                //                           // Navigator.push(
-                //                           //   context,
-                //                           //   PageRouteBuilder(
-                //                           //     opaque: false,
-                //                           //     pageBuilder: (_, __, ___) => SongsListPage(
-                //                           //       listItem: {
-                //                           //         'type': 'album',
-                //                           //         'id': mediaItem.extras?['album_id'],
-                //                           //         'title': mediaItem.album,
-                //                           //         'image': mediaItem.artUri,
-                //                           //       },
-                //                           //     ),
-                //                           //   ),
-                //                           // );
-                //                           break;
-                //                         case 6:
-                //                           '';
-                //                           break;
-                //                         case 0:
-                //                           '';
-                //                           break;
-                //                         case 1:
-                //                           '';
-                //                           break;
-                //                         case 2:
-                //                           '';
-                //                           break;
-                //                         default:
-                //                           // TODO come back here!!!
-                //                           // Navigator.push(
-                //                           //   context,
-                //                           //   PageRouteBuilder(
-                //                           //     opaque: false,
-                //                           //     pageBuilder: (_, __, ___) => AlbumSearchPage(
-                //                           //       query: value.toString(),
-                //                           //       type: 'Artists',
-                //                           //     ),
-                //                           //   ),
-                //                           // );
-                //                           break;
-                //                       }
-                //                     },
-                //                   ),
-                //                 );
-                //               }),
-                //         );
-                //       }),
-                // ),
               ]),
             ),
             Padding(
@@ -1177,10 +712,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
               child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(
-                    15,
+                    16,
+                    14,
+                    16,
                     10,
-                    15,
-                    5,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1227,333 +762,285 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ),
                 ),
                 SizedBox(
+                  width: double.infinity,
                   height: (boxSize + 65),
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection:
-                          Axis.vertical, // Vertical scroll for the outer list
-                      itemCount: 4,
-                      itemBuilder: (context, rowIndex) {
-                        final startIndex = rowIndex * 6;
-                        final endIndex = (rowIndex + 1) * 6;
-                        final items = [
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                          '',
-                        ].sublist(startIndex, endIndex);
-                        return SizedBox(
-                          height: 62,
-                          child: ListView.builder(
-                              physics: PagingScrollPhysics(
-                                  itemDimension:
-                                      MediaQuery.of(context).size.width * 0.9),
-                              scrollDirection: Axis.horizontal,
-                              itemExtent:
-                                  MediaQuery.of(context).size.width * 0.9,
-                              itemCount: items.length,
-                              itemBuilder: (context, index) {
-                                // Map item;
-                                // item = data[lists[1]][index] as Map;
-                                return ListTile(
-                                  dense: false,
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/player');
-                                  },
-                                  title: Text(
-                                    'Assurance',
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.hind(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
+                  child: ScrollConfiguration(
+                    behavior: AppScrollBehavior(),
+                    child: GridView(
+                      scrollDirection: Axis.horizontal,
+                      physics: const PageScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              mainAxisSpacing: 2.0,
+                              crossAxisSpacing: 2.0,
+                              crossAxisCount: 4,
+                              childAspectRatio: 0.18),
+                      children: new_release.asMap().entries.map((entry) {
+                        int index = entry.key;
+                        // String title = entry.value;
+                        return ListTile(
+                          dense: false,
+                          onTap: () {
+                            Navigator.pushNamed(context, '/player');
+                          },
+                          title: Text(
+                            'Assurance',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.hind(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          subtitle: Row(
+                            children: [
+                              Text(
+                                'Davido',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.hind(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Container(
+                                  width: 3,
+                                  height: 3,
+                                  // padding: EdgeInsets.all(3),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                '5.1M plays',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.hind(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          leading: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('${index + 1}'),
+                              SizedBox(
+                                width: 13.sp,
+                              ),
+                              Hero(
+                                tag: 'currentArtwork',
+                                child: imageCard(
+                                  elevation: 8,
+                                  boxDimension: 50.0,
+                                  localImage: true,
+                                  borderRadius: 8,
+                                  imageUrl: 'assets/images/customised.png',
+                                  imageQuality: ImageQuality.medium,
+                                  placeholderImage: const AssetImage(
+                                    'assets/images/customised.png',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          trailing: PopupMenuButton(
+                            icon: Icon(
+                              Icons.more_vert_rounded,
+                              color: Theme.of(context).iconTheme.color,
+                              size: 15,
+                              weight: 3,
+                            ),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15.0),
+                              ),
+                            ),
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                value: 6,
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.delete_rounded,
                                     ),
-                                  ),
-                                  subtitle: Row(
-                                    children: [
-                                      Text(
-                                        'Davido',
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.hind(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: Container(
-                                          width: 3,
-                                          height: 3,
-                                          // padding: EdgeInsets.all(3),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        '5.1M plays',
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.hind(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  leading: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text((rowIndex + 1).toString()),
-                                      SizedBox(
-                                        width: 13.sp,
-                                      ),
-                                      Hero(
-                                        tag: 'currentArtwork',
-                                        child: imageCard(
-                                          elevation: 8,
-                                          boxDimension: 50.0,
-                                          localImage: true,
-                                          borderRadius: 8,
-                                          imageUrl:
-                                              'assets/images/customised.png',
-                                          imageQuality: ImageQuality.medium,
-                                          placeholderImage: const AssetImage(
-                                            'assets/images/customised.png',
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  trailing: PopupMenuButton(
-                                    icon: Icon(
-                                      Icons.more_vert_rounded,
+                                    const SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    Text(
+                                      AppLocalizations.of(
+                                        context,
+                                      )!
+                                          .remove,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              PopupMenuItem(
+                                value: 2,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.playlist_play_rounded,
                                       color: Theme.of(context).iconTheme.color,
-                                      size: 15,
-                                      weight: 3,
+                                      size: 26.0,
                                     ),
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15.0),
-                                      ),
+                                    const SizedBox(width: 10.0),
+                                    Text(
+                                        AppLocalizations.of(context)!.playNext),
+                                  ],
+                                ),
+                              ),
+                              PopupMenuItem(
+                                value: 1,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.queue_music_rounded,
+                                      color: Theme.of(context).iconTheme.color,
                                     ),
-                                    itemBuilder: (context) => [
-                                      PopupMenuItem(
-                                        value: 6,
-                                        child: Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.delete_rounded,
-                                            ),
-                                            const SizedBox(
-                                              width: 10.0,
-                                            ),
-                                            Text(
-                                              AppLocalizations.of(
-                                                context,
-                                              )!
-                                                  .remove,
-                                            ),
-                                          ],
-                                        ),
+                                    const SizedBox(width: 10.0),
+                                    Text(AppLocalizations.of(context)!
+                                        .addToQueue),
+                                  ],
+                                ),
+                              ),
+                              PopupMenuItem(
+                                value: 0,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.playlist_add_rounded,
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
+                                    const SizedBox(width: 10.0),
+                                    Text(AppLocalizations.of(context)!
+                                        .addToPlaylist),
+                                  ],
+                                ),
+                              ),
+                              PopupMenuItem(
+                                value: 4,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.album_rounded,
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
+                                    const SizedBox(width: 10.0),
+                                    Text(AppLocalizations.of(context)!
+                                        .viewAlbum),
+                                  ],
+                                ),
+                              ),
+                              PopupMenuItem(
+                                value: 'artist',
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.person_rounded,
+                                        color:
+                                            Theme.of(context).iconTheme.color,
                                       ),
-                                      PopupMenuItem(
-                                        value: 2,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.playlist_play_rounded,
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                              size: 26.0,
-                                            ),
-                                            const SizedBox(width: 10.0),
-                                            Text(AppLocalizations.of(context)!
-                                                .playNext),
-                                          ],
-                                        ),
-                                      ),
-                                      PopupMenuItem(
-                                        value: 1,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.queue_music_rounded,
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                            ),
-                                            const SizedBox(width: 10.0),
-                                            Text(AppLocalizations.of(context)!
-                                                .addToQueue),
-                                          ],
-                                        ),
-                                      ),
-                                      PopupMenuItem(
-                                        value: 0,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.playlist_add_rounded,
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                            ),
-                                            const SizedBox(width: 10.0),
-                                            Text(AppLocalizations.of(context)!
-                                                .addToPlaylist),
-                                          ],
-                                        ),
-                                      ),
-                                      PopupMenuItem(
-                                        value: 4,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.album_rounded,
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                            ),
-                                            const SizedBox(width: 10.0),
-                                            Text(AppLocalizations.of(context)!
-                                                .viewAlbum),
-                                          ],
-                                        ),
-                                      ),
-                                      PopupMenuItem(
-                                        value: 'artist',
-                                        child: SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.person_rounded,
-                                                color: Theme.of(context)
-                                                    .iconTheme
-                                                    .color,
-                                              ),
-                                              const SizedBox(width: 10.0),
-                                              Text(
-                                                '${AppLocalizations.of(context)!.viewArtist} Test',
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      PopupMenuItem(
-                                        value: 3,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.share_rounded,
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                            ),
-                                            const SizedBox(width: 10.0),
-                                            Text(AppLocalizations.of(context)!
-                                                .share),
-                                          ],
-                                        ),
+                                      const SizedBox(width: 10.0),
+                                      Text(
+                                        '${AppLocalizations.of(context)!.viewArtist} Test',
                                       ),
                                     ],
-                                    onSelected: (value) {
-                                      switch (value) {
-                                        case 3:
-                                          Share.share('');
-                                          break;
-
-                                        case 4:
-                                          // TODO come back here!!!
-                                          // Navigator.push(
-                                          //   context,
-                                          //   PageRouteBuilder(
-                                          //     opaque: false,
-                                          //     pageBuilder: (_, __, ___) => SongsListPage(
-                                          //       listItem: {
-                                          //         'type': 'album',
-                                          //         'id': mediaItem.extras?['album_id'],
-                                          //         'title': mediaItem.album,
-                                          //         'image': mediaItem.artUri,
-                                          //       },
-                                          //     ),
-                                          //   ),
-                                          // );
-                                          break;
-                                        case 6:
-                                          '';
-                                          break;
-                                        case 0:
-                                          '';
-                                          break;
-                                        case 1:
-                                          '';
-                                          break;
-                                        case 2:
-                                          '';
-                                          break;
-                                        default:
-                                          // TODO come back here!!!
-                                          // Navigator.push(
-                                          //   context,
-                                          //   PageRouteBuilder(
-                                          //     opaque: false,
-                                          //     pageBuilder: (_, __, ___) => AlbumSearchPage(
-                                          //       query: value.toString(),
-                                          //       type: 'Artists',
-                                          //     ),
-                                          //   ),
-                                          // );
-                                          break;
-                                      }
-                                    },
                                   ),
-                                );
-                              }),
+                                ),
+                              ),
+                              PopupMenuItem(
+                                value: 3,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.share_rounded,
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
+                                    const SizedBox(width: 10.0),
+                                    Text(AppLocalizations.of(context)!.share),
+                                  ],
+                                ),
+                              ),
+                            ],
+                            onSelected: (value) {
+                              switch (value) {
+                                case 3:
+                                  Share.share('');
+                                  break;
+
+                                case 4:
+                                  // TODO come back here!!!
+                                  // Navigator.push(
+                                  //   context,
+                                  //   PageRouteBuilder(
+                                  //     opaque: false,
+                                  //     pageBuilder: (_, __, ___) => SongsListPage(
+                                  //       listItem: {
+                                  //         'type': 'album',
+                                  //         'id': mediaItem.extras?['album_id'],
+                                  //         'title': mediaItem.album,
+                                  //         'image': mediaItem.artUri,
+                                  //       },
+                                  //     ),
+                                  //   ),
+                                  // );
+                                  break;
+                                case 6:
+                                  '';
+                                  break;
+                                case 0:
+                                  '';
+                                  break;
+                                case 1:
+                                  '';
+                                  break;
+                                case 2:
+                                  '';
+                                  break;
+                                default:
+                                  // TODO come back here!!!
+                                  // Navigator.push(
+                                  //   context,
+                                  //   PageRouteBuilder(
+                                  //     opaque: false,
+                                  //     pageBuilder: (_, __, ___) => AlbumSearchPage(
+                                  //       query: value.toString(),
+                                  //       type: 'Artists',
+                                  //     ),
+                                  //   ),
+                                  // );
+                                  break;
+                              }
+                            },
+                          ),
                         );
-                      }),
+                      }).toList(),
+                    ),
+                  ),
                 ),
               ]),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 1),
+              padding: const EdgeInsets.only(top: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(
-                      15,
-                      10,
-                      15,
-                      5,
+                      16,
+                      14,
+                      16,
+                      16,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1773,15 +1260,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 1),
+              padding: const EdgeInsets.only(top: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(
-                      15,
-                      10,
-                      15,
+                      16,
+                      14,
+                      16,
                       5,
                     ),
                     child: Row(
@@ -1801,7 +1288,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         Card(
                           margin: const EdgeInsets.symmetric(
                             horizontal: 3.0,
-                            vertical: 3.0,
+                            vertical: 1.0,
                           ),
                           color: colorButton,
                           shape: RoundedRectangleBorder(
@@ -1826,7 +1313,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ),
                   SizedBox(
                     // width: double.infinity,
-                    height: boxSize + 60,
+                    height: boxSize + 50,
                     child: ScrollConfiguration(
                       behavior: AppScrollBehavior(),
                       child: GridView(
@@ -1834,14 +1321,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         physics: const PageScrollPhysics(),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                mainAxisSpacing: 2.0,
-                                crossAxisSpacing: 2.0,
+                                mainAxisSpacing: 1.0,
+                                crossAxisSpacing: 1.0,
                                 crossAxisCount: 4,
                                 childAspectRatio: 0.39),
                         children: moodData
                             .map((title) => Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
+                                  padding: const EdgeInsets.only(left: 16),
                                   child: GestureDetector(
                                     child: SizedBox(
                                       width: boxSize - 50,
@@ -1935,238 +1421,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       ),
                     ),
                   ),
-
-                  // SizedBox(
-                  //     height: (boxSize + 10),
-                  //     child: SingleChildScrollView(
-                  //       scrollDirection: Axis.horizontal,
-                  //       child: SingleChildScrollView(
-                  //         scrollDirection: Axis.vertical,
-                  //         child: Column(
-                  //           children: List.generate(4, (row) {
-                  //             // final rowIndex = mood_lists.length / 2;
-                  //             return Row(
-                  //               children: List.generate(4,
-                  //                   (col) {
-                  //                 // int index =
-                  //                 //     row * (mood_lists.length ~/ 2) + col;
-                  //                 return Padding(
-                  //                   padding: const EdgeInsets.only(left: 10),
-                  //                   child: GestureDetector(
-                  //                     child: SizedBox(
-                  //                       width: boxSize - 50,
-                  //                       height: 60,
-                  //                       child: Padding(
-                  //                         padding: const EdgeInsets.only(
-                  //                             top: 8, bottom: 8),
-                  //                         child: Stack(
-                  //                           children: [
-                  //                             Container(
-                  //                               width: boxSize - 60,
-                  //                               height: 140,
-                  //                               decoration: const BoxDecoration(
-                  //                                 color: Color(0xff2F2E2E),
-                  //                               ),
-                  //                               child: Center(
-                  //                                 child: Text(
-                  //                                   (col*row).toString(),
-                  //                                   textAlign: TextAlign.center,
-                  //                                 ),
-                  //                               ),
-                  //                             ),
-                  //                             Positioned(
-                  //                               top: 0,
-                  //                               child: Row(
-                  //                                 children: [
-                  //                                   Container(
-                  //                                     width: 20,
-                  //                                     height: 6,
-                  //                                     decoration:
-                  //                                         const BoxDecoration(
-                  //                                       color: Colors.green,
-                  //                                     ),
-                  //                                   ),
-                  //                                   const SizedBox(
-                  //                                     width: 1,
-                  //                                   ),
-                  //                                   Container(
-                  //                                     width: 105,
-                  //                                     height: 6,
-                  //                                     decoration:
-                  //                                         const BoxDecoration(
-                  //                                       color: Colors.green,
-                  //                                     ),
-                  //                                   ),
-                  //                                   const SizedBox(
-                  //                                     width: 1,
-                  //                                   ),
-                  //                                   Container(
-                  //                                     width: 20,
-                  //                                     height: 6,
-                  //                                     decoration:
-                  //                                         const BoxDecoration(
-                  //                                       color: Colors.green,
-                  //                                     ),
-                  //                                   ),
-                  //                                 ],
-                  //                               ),
-                  //                             ),
-                  //                           ],
-                  //                         ),
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                 );
-                  //               }),
-                  //             );
-                  //           }),
-                  //         ),
-                  //       ),
-                  //     )
-                  //     // ListView.builder(
-                  //     //     physics: const BouncingScrollPhysics(),
-                  //     //     scrollDirection: Axis.horizontal,
-                  //     //     padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //     //     itemCount: 4,
-                  //     //     itemBuilder: (context, index) {
-                  //     //       // Map item;
-                  //     //       // item = data[lists[1]][index] as Map;
-                  //     //       return GestureDetector(
-                  //     //         child: SizedBox(
-                  //     //           width: boxSize - 20,
-                  //     //           child: HoverBox(
-                  //     //               child: imageCard(
-                  //     //                 margin: const EdgeInsets.symmetric(
-                  //     //                     horizontal: 4, vertical: 4.0),
-                  //     //                 borderRadius: 2.4,
-                  //     //                 imageUrl: 'assets/images/upcoming.png',
-                  //     //                 imageQuality: ImageQuality.medium,
-                  //     //                 placeholderImage: const AssetImage(
-                  //     //                   'assets/images/upcoming.png',
-                  //     //                 ),
-                  //     //               ),
-                  //     //               builder: ({
-                  //     //                 required BuildContext context,
-                  //     //                 required bool isHover,
-                  //     //                 Widget? child,
-                  //     //               }) {
-                  //     //                 return Card(
-                  //     //                   color:
-                  //     //                       isHover ? null : Colors.transparent,
-                  //     //                   elevation: 0,
-                  //     //                   margin: EdgeInsets.zero,
-                  //     //                   shape: RoundedRectangleBorder(
-                  //     //                     borderRadius: BorderRadius.circular(
-                  //     //                       2.4,
-                  //     //                     ),
-                  //     //                   ),
-                  //     //                   clipBehavior: Clip.antiAlias,
-                  //     //                   child: Column(
-                  //     //                     mainAxisAlignment:
-                  //     //                         MainAxisAlignment.start,
-                  //     //                     crossAxisAlignment:
-                  //     //                         CrossAxisAlignment.start,
-                  //     //                     children: [
-                  //     //                       Stack(
-                  //     //                         children: [
-                  //     //                           SizedBox.square(
-                  //     //                             dimension: isHover
-                  //     //                                 ? boxSize - 25
-                  //     //                                 : boxSize - 30,
-                  //     //                             child: child,
-                  //     //                           ),
-                  //     //                           if (isHover)
-                  //     //                             Positioned.fill(
-                  //     //                               child: Container(
-                  //     //                                 margin:
-                  //     //                                     const EdgeInsets.all(
-                  //     //                                   4.0,
-                  //     //                                 ),
-                  //     //                                 decoration: BoxDecoration(
-                  //     //                                   color: Colors.black54,
-                  //     //                                   borderRadius:
-                  //     //                                       BorderRadius.circular(
-                  //     //                                     10.0,
-                  //     //                                   ),
-                  //     //                                 ),
-                  //     //                                 child: Center(
-                  //     //                                   child: DecoratedBox(
-                  //     //                                     decoration:
-                  //     //                                         BoxDecoration(
-                  //     //                                       color: Colors.black87,
-                  //     //                                       borderRadius:
-                  //     //                                           BorderRadius
-                  //     //                                               .circular(
-                  //     //                                         1000.0,
-                  //     //                                       ),
-                  //     //                                     ),
-                  //     //                                     child: const Icon(
-                  //     //                                       Icons
-                  //     //                                           .play_arrow_rounded,
-                  //     //                                       size: 50.0,
-                  //     //                                       color: Colors.white,
-                  //     //                                     ),
-                  //     //                                   ),
-                  //     //                                 ),
-                  //     //                               ),
-                  //     //                             ),
-                  //     //                         ],
-                  //     //                       ),
-                  //     //                       Padding(
-                  //     //                         padding: const EdgeInsets.symmetric(
-                  //     //                           horizontal: 10.0,
-                  //     //                         ),
-                  //     //                         child: Column(
-                  //     //                           mainAxisAlignment:
-                  //     //                               MainAxisAlignment.start,
-                  //     //                           crossAxisAlignment:
-                  //     //                               CrossAxisAlignment.start,
-                  //     //                           children: [
-                  //     //                             Padding(
-                  //     //                               padding:
-                  //     //                                   const EdgeInsets.only(
-                  //     //                                 right: 10,
-                  //     //                               ),
-                  //     //                               child: Text(
-                  //     //                                 'Vishing',
-                  //     //                                 textAlign: TextAlign.left,
-                  //     //                                 softWrap: false,
-                  //     //                                 maxLines: 2,
-                  //     //                                 overflow:
-                  //     //                                     TextOverflow.ellipsis,
-                  //     //                                 style: GoogleFonts.hind(
-                  //     //                                   fontWeight:
-                  //     //                                       FontWeight.w500,
-                  //     //                                 ),
-                  //     //                               ),
-                  //     //                             ),
-                  //     //                             Text(
-                  //     //                               'Shugar',
-                  //     //                               textAlign: TextAlign.left,
-                  //     //                               softWrap: true,
-                  //     //                               maxLines: 2,
-                  //     //                               overflow:
-                  //     //                                   TextOverflow.ellipsis,
-                  //     //                               style: GoogleFonts.hind(
-                  //     //                                 fontSize: 11,
-                  //     //                                 color: Theme.of(context)
-                  //     //                                     .textTheme
-                  //     //                                     .bodySmall!
-                  //     //                                     .color,
-                  //     //                               ),
-                  //     //                             ),
-                  //     //                           ],
-                  //     //                         ),
-                  //     //                       ),
-                  //     //                     ],
-                  //     //                   ),
-                  //     //                 );
-                  //     //               }),
-                  //     //         ),
-                  //     //       );
-                  //     //     }),
-
-                  //     ),
                 ],
               ),
             ),

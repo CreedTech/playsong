@@ -21,9 +21,9 @@ class SearchAddPlaylist {
       final RegExpMatch? id = RegExp(r'.*list\=(.*?)&').firstMatch(link);
       if (id != null) {
         final Playlist metadata =
-            await YouTubeServices().getPlaylistDetails(id[1]!);
+            await YouTubeServices.instance.getPlaylistDetails(id[1]!);
         final List<Video> tracks =
-            await YouTubeServices().getPlaylistSongs(id[1]!);
+            await YouTubeServices.instance.getPlaylistSongs(id[1]!);
         return {
           'title': metadata.title,
           'image': metadata.thumbnails.standardResUrl,
@@ -125,76 +125,76 @@ class SearchAddPlaylist {
     }
   }
 
-  static Stream<Map> ytSongsAdder(String playName, List tracks) async* {
-    int done = 0;
-    for (final track in tracks) {
-      String? trackName;
-      try {
-        trackName = (track as Video).title;
-        yield {'done': ++done, 'name': trackName};
-      } catch (e) {
-        yield {'done': ++done, 'name': ''};
-      }
-      try {
-        final List result =
-            await PlaySongAPI().fetchTopSearchResult(trackName!.split('|')[0]);
-        addMapToPlaylist(playName, result[0] as Map);
-      } catch (e) {
-        Logger.root.severe('Error in $done: $e');
-      }
-    }
-  }
+  // static Stream<Map> ytSongsAdder(String playName, List tracks) async* {
+  //   int done = 0;
+  //   for (final track in tracks) {
+  //     String? trackName;
+  //     try {
+  //       trackName = (track as Video).title;
+  //       yield {'done': ++done, 'name': trackName};
+  //     } catch (e) {
+  //       yield {'done': ++done, 'name': ''};
+  //     }
+  //     try {
+  //       final List result =
+  //           await PlaySongAPI().fetchTopSearchResult(trackName!.split('|')[0]);
+  //       addMapToPlaylist(playName, result[0] as Map);
+  //     } catch (e) {
+  //       Logger.root.severe('Error in $done: $e');
+  //     }
+  //   }
+  // }
 
-  static Stream<Map> spotifySongsAdder(String playName, List tracks) async* {
-    int done = 0;
-    for (final track in tracks) {
-      String? trackName;
-      String? artistName;
-      try {
-        trackName = track['track']['name'].toString();
-        artistName = (track['track']['artists'] as List)
-            .map((e) => e['name'])
-            .toList()
-            .join(', ');
-        yield {'done': ++done, 'name': '$trackName - $artistName'};
-      } catch (e) {
-        yield {'done': ++done, 'name': ''};
-      }
-      try {
-        final List result =
-            await PlaySongAPI().fetchTopSearchResult('$trackName by $artistName');
-        addMapToPlaylist(playName, result[0] as Map);
-      } catch (e) {
-        Logger.root.severe('Error in $done: $e');
-      }
-    }
-  }
+  // static Stream<Map> spotifySongsAdder(String playName, List tracks) async* {
+  //   int done = 0;
+  //   for (final track in tracks) {
+  //     String? trackName;
+  //     String? artistName;
+  //     try {
+  //       trackName = track['track']['name'].toString();
+  //       artistName = (track['track']['artists'] as List)
+  //           .map((e) => e['name'])
+  //           .toList()
+  //           .join(', ');
+  //       yield {'done': ++done, 'name': '$trackName - $artistName'};
+  //     } catch (e) {
+  //       yield {'done': ++done, 'name': ''};
+  //     }
+  //     try {
+  //       final List result =
+  //           await PlaySongAPI().fetchTopSearchResult('$trackName by $artistName');
+  //       addMapToPlaylist(playName, result[0] as Map);
+  //     } catch (e) {
+  //       Logger.root.severe('Error in $done: $e');
+  //     }
+  //   }
+  // }
 
-  static Stream<Map> ressoSongsAdder(String playName, List tracks) async* {
-    int done = 0;
-    for (final track in tracks) {
-      String? trackName;
-      String? artistName;
-      try {
-        trackName = track['name'].toString();
-        artistName = (track['artists'] as List)
-            .map((e) => e['name'])
-            .toList()
-            .join(', ');
+  // static Stream<Map> ressoSongsAdder(String playName, List tracks) async* {
+  //   int done = 0;
+  //   for (final track in tracks) {
+  //     String? trackName;
+  //     String? artistName;
+  //     try {
+  //       trackName = track['name'].toString();
+  //       artistName = (track['artists'] as List)
+  //           .map((e) => e['name'])
+  //           .toList()
+  //           .join(', ');
 
-        yield {'done': ++done, 'name': '$trackName - $artistName'};
-      } catch (e) {
-        yield {'done': ++done, 'name': ''};
-      }
-      try {
-        final List result =
-            await PlaySongAPI().fetchTopSearchResult('$trackName by $artistName');
-        addMapToPlaylist(playName, result[0] as Map);
-      } catch (e) {
-        Logger.root.severe('Error in $done: $e');
-      }
-    }
-  }
+  //       yield {'done': ++done, 'name': '$trackName - $artistName'};
+  //     } catch (e) {
+  //       yield {'done': ++done, 'name': ''};
+  //     }
+  //     try {
+  //       final List result =
+  //           await PlaySongAPI().fetchTopSearchResult('$trackName by $artistName');
+  //       addMapToPlaylist(playName, result[0] as Map);
+  //     } catch (e) {
+  //       Logger.root.severe('Error in $done: $e');
+  //     }
+  //   }
+  // }
 
   static Future<void> showProgress(
     int total,

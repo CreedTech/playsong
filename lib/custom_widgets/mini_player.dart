@@ -23,9 +23,13 @@ class MiniPlayer extends StatefulWidget {
 
 class _MiniPlayerState extends State<MiniPlayer> {
   final AudioPlayerHandler audioHandler = GetIt.I<AudioPlayerHandler>();
+   bool _isDismissed = false;
 
   @override
   Widget build(BuildContext context) {
+     if (_isDismissed) {
+      return SizedBox(); // Return an empty SizedBox if dismissed
+    }
     // final double screenWidth = MediaQuery.of(context).size.width;
     // final double screenHeight = MediaQuery.of(context).size.height;
     // final bool rotated = screenHeight < screenWidth;
@@ -61,6 +65,11 @@ class _MiniPlayerState extends State<MiniPlayer> {
               }
               return Future.value(false);
             },
+            onDismissed: (direction) {
+              setState(() {
+                _isDismissed = true; // Update dismissal state
+              });
+            },
             child: Dismissible(
               key: Key(mediaItem?.id ?? 'nothingPlaying'),
               confirmDismiss: (DismissDirection direction) {
@@ -73,6 +82,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
                 }
                 return Future.value(false);
               },
+              
               child: Card(
                 margin: const EdgeInsets.symmetric(
                   horizontal: 2.0,

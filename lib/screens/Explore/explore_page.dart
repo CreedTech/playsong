@@ -64,22 +64,27 @@ class _ExplorePageState extends State<ExplorePage> {
                 // floating: true,
                 // automaticallyImplyLeading: false,
                 actions: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 18.0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          1000.0,
-                        ),
-                      ),
-                      color: Colors.black54,
-                      child: Image.asset(
-                        'assets/images/lady_image.png',
-                        width: 30,
-                        height: 30,
-                      ),
+                  GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, '/account');
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 18.0),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      1000.0,
                     ),
                   ),
+                  color: Colors.black54,
+                  child: Image.asset(
+                    'assets/images/lady_image.png',
+                    width: 30,
+                    height: 30,
+                  ),
+                ),
+              ),
+            ),
                 ],
               ),
             ];

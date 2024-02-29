@@ -33,6 +33,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool _isVisible = true;
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
   String? appVersion;
   String name =
@@ -200,6 +201,10 @@ class _HomePageState extends State<HomePage> {
     final double screenWidth = MediaQuery.of(context).size.width;
     final bool rotated = MediaQuery.of(context).size.height < screenWidth;
     final miniplayer = MiniPlayer();
+    if (_isVisible == false) {
+      return SizedBox(); // Return an empty SizedBox if dismissed
+    }
+
     return Scaffold(
       // backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -230,7 +235,7 @@ class _HomePageState extends State<HomePage> {
       //     Container(),
       //   ],
       // ),
-     
+
       body: Row(
         children: [
           if (rotated)
@@ -331,6 +336,20 @@ class _HomePageState extends State<HomePage> {
               customWidget: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Dismissible(
+                  //   key: const Key('miniplayer'),
+                  //   direction: DismissDirection.horizontal,
+                  //   child: Visibility(
+                  //     visible: _isVisible,
+                  //     child: miniplayer,
+                  //   ),
+                  //   onDismissed: (direction) {
+                  //     setState(() {
+                  //       _isVisible = false;
+                  //     });
+                  //     print(_isVisible);
+                  //   },
+                  // ),
                   miniplayer,
                   if (!rotated)
                     ValueListenableBuilder(
@@ -345,7 +364,7 @@ class _HomePageState extends State<HomePage> {
                           height: 60,
                           child: CustomBottomNavBar(
                             currentIndex: indexValue,
-                            backgroundColor:const Color(0xff0D0D0C),
+                            backgroundColor: const Color(0xff0D0D0C),
                             onTap: (index) {
                               onItemTapped(index);
                             },
@@ -356,6 +375,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                 ],
               ),
+
               screens: sectionsToShow.map((e) {
                 switch (e) {
                   case 'Spotlight':
@@ -371,7 +391,7 @@ class _HomePageState extends State<HomePage> {
                   case 'Search':
                     return const SafeArea(child: SearchPage());
                   case 'Library':
-                    return const LibraryPage();
+                    return const SafeArea(child: LibraryPage());
                   default:
                     return SettingsPage(callback: callback);
                 }
@@ -388,8 +408,14 @@ class _HomePageState extends State<HomePage> {
       switch (section) {
         case 'Spotlight':
           return CustomBottomNavBarItem(
-            icon: Image.asset('assets/icons/spotlight.png',width: 20,),
-            activeIcon: Image.asset('assets/icons/spotlight_colored.png',width: 20,),
+            icon: Image.asset(
+              'assets/icons/spotlight.png',
+              width: 20,
+            ),
+            activeIcon: Image.asset(
+              'assets/icons/spotlight_colored.png',
+              width: 20,
+            ),
             title: const Text('Spotlight'),
             selectedColor: Theme.of(context).primaryColor,
           );
@@ -402,7 +428,10 @@ class _HomePageState extends State<HomePage> {
         case 'Search':
           return CustomBottomNavBarItem(
             icon: const Icon(Icons.search),
-            activeIcon: Image.asset('assets/icons/search_colored.png',width: 20,),
+            activeIcon: Image.asset(
+              'assets/icons/search_colored.png',
+              width: 20,
+            ),
             title: Text(AppLocalizations.of(context)!.search),
             selectedColor: Theme.of(context).primaryColor,
           );

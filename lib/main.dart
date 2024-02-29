@@ -7,7 +7,7 @@ import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:metadata_god/metadata_god.dart';
+// import 'package:metadata_god/metadata_god.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:playsong/screens/home/navigation_view.dart';
@@ -74,7 +74,7 @@ Future<void> setOptimalDisplayMode() async {
 
 Future<void> startService() async {
   await initializeLogging();
-  MetadataGod.initialize();
+  // MetadataGod.initialize();
   final audioHandlerHelper = AudioHandlerHelper();
   final AudioPlayerHandler audioHandler =
       await audioHandlerHelper.getAudioHandler();

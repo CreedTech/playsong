@@ -53,7 +53,6 @@ PODS:
     - Flutter
   - just_audio (0.0.1):
     - Flutter
-  - metadata_god (0.0.1)
   - on_audio_query_ios (0.0.1):
     - Flutter
     - SwiftyBeaver
@@ -91,7 +90,6 @@ DEPENDENCIES:
   - flutter_archive (from `.symlinks/plugins/flutter_archive/ios`)
   - home_widget (from `.symlinks/plugins/home_widget/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/ios`)
-  - metadata_god (from `.symlinks/plugins/metadata_god/ios`)
   - on_audio_query_ios (from `.symlinks/plugins/on_audio_query_ios/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -131,8 +129,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/home_widget/ios"
   just_audio:
     :path: ".symlinks/plugins/just_audio/ios"
-  metadata_god:
-    :path: ".symlinks/plugins/metadata_god/ios"
   on_audio_query_ios:
     :path: ".symlinks/plugins/on_audio_query_ios/ios"
   package_info_plus:
@@ -163,7 +159,6 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   home_widget: 0434835a4c9a75704264feff6be17ea40e0f0d57
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
-  metadata_god: eceae399d0020475069a5cebc35943ce8562b5d7
   on_audio_query_ios: e5afb0d4b42cfa3e8762d8ec1953540cb4f02100
   package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
